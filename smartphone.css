@@ -1,0 +1,218 @@
+*
+{
+	padding: 0;
+	margin: 0;
+}
+
+html, body
+{
+	width: 100%;
+	height: 100%;
+}
+
+p
+{
+	position: relative;
+	font-size: 1.5em;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+button
+{
+	position: relative;
+	font-size: 1.8em;
+	outline: none;
+}
+
+.hidden
+{
+	display: none;
+}
+
+#divPelicula
+{
+	position: fixed;
+	width: 100%;
+	height: 15%;
+	background: #FFF;
+	z-index: 2;
+}
+
+#pelicula
+{
+	width: 70%;
+	height: 35%;
+	border: 5px solid black;
+	left: 3%;
+	float: left;
+	top: 28%;
+	text-align: center;
+	line-height: 150%;
+	background: #FFF;
+}
+
+#xPelicula
+{
+	left: 5%;
+	width: 10%;
+	float: left;
+	top: 35%;
+}
+
+#divPelicula>button
+{
+	width: 10%;
+	height: 30%;
+	font-size: 0.8em;
+	float: left;
+	top: 32%;
+	left: 6%;
+	border-radius: 50%;
+	line-height: 100%;
+}
+
+#divLista
+{
+	position: absolute;
+	width: 100%;
+	min-height: 100%;
+	box-sizing: border-box;
+	padding: 5%;
+	padding-bottom: 25%;
+	top: 13%;
+	background: #FFF;
+}
+
+#divLista>h1
+{
+	font-size: 2em;
+	text-align: center;
+}
+
+#ordenAlf
+{
+	float: left;
+	margin-right: 30%;
+	margin-left: 10%;
+}
+
+#ordenAlf, #ordenRec
+{
+	margin-bottom: 10%;
+	position: relative;
+	font-size: 1.5em;
+	font-family: 'Noto Sans', sans-serif;
+	background: transparent;
+	border: none;
+}
+
+#listaPeliculas>p
+{
+	margin-bottom: 2%;
+	margin-right: 50%;
+	float: left;
+}
+
+#divBotones
+{
+	position: fixed;
+	width: 100%;
+	height: 10%;
+	bottom: 0;
+	background: #FFF;
+	z-index: 2;
+}
+
+#divBotones>button
+{
+	float: left;
+}
+
+#btnAzar
+{
+	position: absolute;
+	top: 10%;
+	left: 5%;
+	width: 70%;
+	height: 80%;
+	border-radius: 10%;
+}
+
+#btnAnadir
+{
+	position: absolute;
+	top: 10%;
+	height: 80%;
+	width: 16.5%;
+	right: 5%;
+	border-radius: 50%;
+}
+
+#motivo, #nuevaP
+{
+	position: fixed;
+	top: 20%;
+	left: 10%;
+	width: 80%;
+	height: 60%;
+	background: #FFF;
+	z-index: 3;
+	text-align: center;
+	box-sizing: border-box;
+	border: 5px solid black;
+}
+
+#motivo>button
+{
+	right: 5%;
+	float: right;
+	background: transparent;
+	border: none;
+	color: red;
+}
+
+#motivo>textarea
+{
+	width: 80%;
+	height: 60%;
+	margin-top: 5%
+}
+
+#motivoT
+{
+	margin-top: 10%;
+	margin-bottom: 5%;
+}
+
+#nuevaP>p
+{
+	margin-top: 10%;
+}
+
+#nuevaP>input
+{
+	width: 80%;
+	height: 5%;
+}
+
+#nuevaP>textarea
+{
+	width: 80%;
+	height: 40%;
+	margin-top: 5%
+}
+
+#btnAgregarNuevaP
+{
+	margin-top: 10%;
+}
+
+#xNuevaP
+{
+	top: 0;
+	right: 3%;
+	float: right;
+	background: transparent;
+	border: none;
+	color: red;
+}
