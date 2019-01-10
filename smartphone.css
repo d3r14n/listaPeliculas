@@ -151,15 +151,25 @@ button
 #motivo, #nuevaP
 {
 	position: fixed;
-	top: 20%;
-	left: 10%;
-	width: 80%;
-	height: 60%;
 	background: #FFF;
 	z-index: 3;
 	text-align: center;
 	box-sizing: border-box;
 	border: 5px solid black;
+	left: 10%;
+	width: 80%;
+}
+
+#motivo
+{
+	top: 20%;
+	height: 60%;
+}
+
+#nuevaP
+{
+	top: 4%;
+	height: 90%;
 }
 
 #motivo>button
