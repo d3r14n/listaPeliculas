@@ -10,6 +10,14 @@ if (localStorage.getItem("pelicula") == null)
 //Variables Globales
 var pelicula = localStorage.getItem("pelicula").split(";");
 var info = localStorage.getItem("info").split(";");
+/*
+AZUp: Orden Alfabetico
+RECUp: Orden por Recientes
+	//True: Ordenar de mayor a menor (Más reciente)
+	//False: Ordenar de menor a mayor (Menos reciente)
+*/
+var AZUp = true;
+var RECUp = false;
 
 showMovieList();
 
@@ -26,16 +34,6 @@ document.getElementById('xMotivo').addEventListener("click", closeInfo); //Botó
 document.getElementById('btnAgregarNuevaP').addEventListener("click", addMovie); //Botón para añadir una pelicula
 
 
-/*
-AZUp: Orden Alfabetico
-RECUp: Orden por Recientes
-	//True: Ordenar de mayor a menor (Más reciente)
-	//False: Ordenar de menor a mayor (Menos reciente)
-*/
-var AZUp = true;
-var RECUp = false;
-
-// MAIN FUNCTIONS //
 function showMovieList()
 {
 	if (pelicula.length < 2)
@@ -58,16 +56,17 @@ function displayInfo()
 	document.getElementById('divPelicula').style.background = "#707070";
 	document.getElementById('divLista').style.background = "#707070";
 	document.getElementById('divBotones').style.background = "#707070";
-	IDP = document.getElementById('IDPelicula').innerHTML;
-	if (IDP <= 0)
+
+	if(document.getElementById('pelicula').innerHTML != "")
 	{
-		document.getElementById('motivoT').innerHTML = "No hay ninguna película seleccionada";
-		document.getElementById('motivoInfo').innerHTML = "";
+		IDP = pelicula.indexOf(document.getElementById('pelicula').innerHTML);
+		document.getElementById('motivoT').innerHTML = pelicula[IDP];
+		document.getElementById('motivoInfo').innerHTML = info[IDP];
 	}
 	else
 	{
-		document.getElementById('motivoT').innerHTML = pelicula[IDP];
-		document.getElementById('motivoInfo').innerHTML = info[IDP];
+		document.getElementById('motivoT').innerHTML = "No hay ninguna película seleccionada";
+		document.getElementById('motivoInfo').innerHTML = "";
 	}
 }
 
@@ -79,7 +78,6 @@ function displayNew()
 	document.getElementById('divBotones').style.background = "#707070";
 }
 
-//↑↓
 function orderAZ()
 {
 	pelicula.shift();
@@ -122,6 +120,10 @@ function orderAZ()
 
 function orderREC()
 {
+	pelicula = localStorage.getItem("pelicula").split(";");
+	info = localStorage.getItem("info").split(";");
+	pelicula.shift();
+	info.shift();
 	if (RECUp)
 	{
 		document.getElementById('ordenRec').innerHTML = "Agregado ↓";
@@ -129,30 +131,61 @@ function orderREC()
 	else
 	{
 		document.getElementById('ordenRec').innerHTML = "Agregado ↑";
+		pelicula.reverse();
+		info.reverse();
 	}
-	pelicula.reverse();
-	info.reverse();
-	for(i = pelicula.length - 1; i >= 0; i--)
-	{
-		pelicula[i] = pelicula[i-1];
-		info[i] = info[i-1];
-	}
-	pelicula[0] = "No se han añadido películas";
-	info[0] = null;
+	pelicula.unshift("No se han añadido películas");
+	info.unshift(null);
 	showMovieList();
 	RECUp = !RECUp;
 }
 
 function strikeMovie()
 {
-	alert("¡Pelicula Vista!");
+	pelicula = localStorage.getItem("pelicula").split(";");
+	info = localStorage.getItem("info").split(";");
+	IDP = pelicula.indexOf(document.getElementById('pelicula').innerHTML);
+	if(IDP > 0)
+	{
+		if(confirm("¿Desea eliminar \"" + pelicula[IDP] + "\" de la lista?"))
+		{
+			if(confirm("¿Está seguro?"))
+			{
+				movieString = "No se han añadido películas";
+				infoString = "null";
+				pelicula.splice(IDP, 1);
+				info.splice(IDP, 1);
+				for (i = 1; i < pelicula.length; i++)
+				{
+					movieString += ";" + pelicula[i];
+					infoString += ";" + info[i];
+				}
+				localStorage.setItem("pelicula", movieString);
+				localStorage.setItem("info", infoString);
+				document.getElementById('pelicula').innerHTML = "";
+				document.getElementById('ordenRec').innerHTML = "Agregado ↓";
+				RECUp = false;
+				showMovieList();
+			}
+		}
+	}
+	else
+	{
+		alert("No hay ninguna película seleccionada");
+	}
 }
 
 function selectRandom()
 {
-	n = randomNumber(pelicula.length - 1, 1);
-	document.getElementById('pelicula').innerHTML = pelicula[n];
-	document.getElementById('IDPelicula').innerHTML = n;
+	if (pelicula.length > 1)
+	{
+		n = randomNumber(pelicula.length - 1, 1);
+		document.getElementById('pelicula').innerHTML = pelicula[n];
+	}
+	else
+	{
+		alert("No se han añadido películas");
+	}
 }
 
 function closeNew()
@@ -175,7 +208,7 @@ function addMovie()
 {
 	movieT = document.getElementById('nombrePelicula').value;
 	movieI = document.getElementById('motivoP').value;
-	if(confirm("¿Seguro que desea agregar la pelicula \""+movieT+"\"?"))
+	if(confirm("¿Seguro que desea agregar la película \""+movieT+"\"?"))
 	{
 		localStorage.setItem("pelicula", localStorage.getItem("pelicula") + ";" + movieT);
 		localStorage.setItem("info", localStorage.getItem("info") + ";" + movieI);
@@ -191,8 +224,6 @@ function addMovie()
 	}
 }
 
-
-// SECONDARY FUNCTIONS //
 function randomNumber(max, min=0)
 {
 	return Math.floor(Math.random() * (max - min + 1) ) + min;
