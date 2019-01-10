@@ -7,6 +7,10 @@ if (localStorage.getItem("pelicula") == null)
 	localStorage.setItem("info", null);
 }
 
+//Variables Globales
+var pelicula = localStorage.getItem("pelicula").split(";");
+var info = localStorage.getItem("info").split(";");
+
 showMovieList();
 
 //Escucha Eventos para los distintos elementos interactuables
@@ -29,14 +33,11 @@ RECUp: Orden por Recientes
 	//False: Ordenar de menor a mayor (Menos reciente)
 */
 var AZUp = true;
-var RECUp = true;
+var RECUp = false;
 
 // MAIN FUNCTIONS //
 function showMovieList()
 {
-	var pelicula = localStorage.getItem("pelicula").split(";");
-	var info = localStorage.getItem("info").split(";");
-
 	if (pelicula.length < 2)
 	{
 		document.getElementById('listaPeliculas').innerHTML = "<h2>" + pelicula[0] + "</h2>"
@@ -57,6 +58,17 @@ function displayInfo()
 	document.getElementById('divPelicula').style.background = "#707070";
 	document.getElementById('divLista').style.background = "#707070";
 	document.getElementById('divBotones').style.background = "#707070";
+	IDP = document.getElementById('IDPelicula').innerHTML;
+	if (IDP <= 0)
+	{
+		document.getElementById('motivoT').innerHTML = "No hay ninguna película seleccionada";
+		document.getElementById('motivoInfo').innerHTML = "";
+	}
+	else
+	{
+		document.getElementById('motivoT').innerHTML = pelicula[IDP];
+		document.getElementById('motivoInfo').innerHTML = info[IDP];
+	}
 }
 
 function displayNew()
@@ -67,15 +79,18 @@ function displayNew()
 	document.getElementById('divBotones').style.background = "#707070";
 }
 
+//↑↓
 function orderAZ()
 {
 	if (AZUp)
 	{
-		alert("A-Z");
+		//alert("A-Z");
+		document.getElementById('ordenAlf').innerHTML = "A-Z ↓"
 	}
 	else
 	{
-		alert("Z-A");
+		//alert("Z-A");
+		document.getElementById('ordenAlf').innerHTML = "A-Z ↑"
 	}
 	AZUp = !AZUp;
 }
@@ -84,11 +99,13 @@ function orderREC()
 {
 	if (RECUp)
 	{
-		alert("Más Reciente");
+		//alert("Más Reciente");
+		document.getElementById('ordenRec').innerHTML = "Agregado ↓"
 	}
 	else
 	{
-		alert("Menos Reciente");
+		//alert("Menos Reciente");
+		document.getElementById('ordenRec').innerHTML = "Agregado ↑"
 	}
 	RECUp = !RECUp;
 }
@@ -100,7 +117,9 @@ function strikeMovie()
 
 function selectRandom()
 {
-	alert("Pelicula seleccionada");
+	n = randomNumber(pelicula.length - 1, 1);
+	document.getElementById('pelicula').innerHTML = pelicula[n];
+	document.getElementById('IDPelicula').innerHTML = n;
 }
 
 function closeNew()
