@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+		id          = "com.derian.paginacool"
+		version     = "0.0.1" >
+
+	<name>Pagina Cool</name>
+
+	<description>
+		Lista de peliculas para elegir al azar
+	</description>
+
+	<author>
+		Derian J. Hndz. L.
+	</author>
+
+</widget>
