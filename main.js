@@ -82,16 +82,41 @@ function displayNew()
 //↑↓
 function orderAZ()
 {
+	pelicula.shift();
+	info.shift();
+	sorted = false;
+	while(!sorted)
+	{
+		sorted = true;
+		for (x = 0; x < pelicula.length - 1; x++)
+		{
+			if (pelicula[x].toLowerCase() > pelicula[x+1].toLowerCase())
+			{
+				sorted = false;
+
+				tempP = pelicula[x];
+				pelicula[x] = pelicula[x+1];
+				pelicula[x+1] = tempP;
+
+				tempI = info[x];
+				info[x] = info[x+1];
+				info[x+1] = tempI;
+			}
+		}
+	}
 	if (AZUp)
 	{
-		//alert("A-Z");
-		document.getElementById('ordenAlf').innerHTML = "A-Z ↓"
+		document.getElementById('ordenAlf').innerHTML = "A-Z ↓";
 	}
 	else
 	{
-		//alert("Z-A");
-		document.getElementById('ordenAlf').innerHTML = "A-Z ↑"
+		document.getElementById('ordenAlf').innerHTML = "A-Z ↑";
+		pelicula.reverse();
+		info.reverse();
 	}
+	pelicula.unshift("No se han añadido películas");
+	info.unshift(null);
+	showMovieList();
 	AZUp = !AZUp;
 }
 
@@ -99,14 +124,22 @@ function orderREC()
 {
 	if (RECUp)
 	{
-		//alert("Más Reciente");
-		document.getElementById('ordenRec').innerHTML = "Agregado ↓"
+		document.getElementById('ordenRec').innerHTML = "Agregado ↓";
 	}
 	else
 	{
-		//alert("Menos Reciente");
-		document.getElementById('ordenRec').innerHTML = "Agregado ↑"
+		document.getElementById('ordenRec').innerHTML = "Agregado ↑";
 	}
+	pelicula.reverse();
+	info.reverse();
+	for(i = pelicula.length - 1; i >= 0; i--)
+	{
+		pelicula[i] = pelicula[i-1];
+		info[i] = info[i-1];
+	}
+	pelicula[0] = "No se han añadido películas";
+	info[0] = null;
+	showMovieList();
 	RECUp = !RECUp;
 }
 
@@ -146,9 +179,13 @@ function addMovie()
 	{
 		localStorage.setItem("pelicula", localStorage.getItem("pelicula") + ";" + movieT);
 		localStorage.setItem("info", localStorage.getItem("info") + ";" + movieI);
+		pelicula = localStorage.getItem("pelicula").split(";");
+		info = localStorage.getItem("info").split(";");
 		alert("Pelicula añadida");
 		document.getElementById('nombrePelicula').value = "";
 		document.getElementById('motivoP').value = "";
+		document.getElementById('ordenRec').innerHTML = "Agregado ↓";
+		RECUp = false;
 		closeNew();
 		showMovieList();
 	}
