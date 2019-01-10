@@ -75,7 +75,7 @@ button
 {
 	position: absolute;
 	width: 100%;
-	min-height: 100%;
+	min-height: 80%;
 	box-sizing: border-box;
 	padding: 5%;
 	padding-bottom: 25%;
