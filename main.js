@@ -33,7 +33,6 @@ document.getElementById('xNuevaP').addEventListener("click", closeNew); //Botón
 document.getElementById('xMotivo').addEventListener("click", closeInfo); //Botón para cerrar el modal de información
 document.getElementById('btnAgregarNuevaP').addEventListener("click", addMovie); //Botón para añadir una pelicula
 
-
 function showMovieList()
 {
 	if (pelicula.length < 2)
@@ -45,7 +44,7 @@ function showMovieList()
 		document.getElementById('listaPeliculas').innerHTML = "";
 		for (i = 1; i < pelicula.length; i++)
 		{
-			document.getElementById('listaPeliculas').innerHTML += "<p id='p"+i+"'>" + pelicula[i] + "</p>";
+			document.getElementById('listaPeliculas').innerHTML += "<p id='p"+i+"' onclick='selectThis(this.innerHTML)'>" + pelicula[i] + "</p>";
 		}
 	}
 }
@@ -53,9 +52,9 @@ function showMovieList()
 function displayInfo()
 {
 	document.getElementById('motivo').classList.remove("hidden");
-	document.getElementById('divPelicula').style.background = "#707070";
-	document.getElementById('divLista').style.background = "#707070";
-	document.getElementById('divBotones').style.background = "#707070";
+	document.getElementById('divPelicula').style.background = "#00394C";
+	document.getElementById('divLista').style.background = "rgba(0, 0, 0, 0.6)";
+	document.getElementById('divBotones').style.background = "#00394C";
 
 	if(document.getElementById('pelicula').innerHTML != "")
 	{
@@ -73,9 +72,9 @@ function displayInfo()
 function displayNew()
 {
 	document.getElementById('nuevaP').classList.remove("hidden");
-	document.getElementById('divPelicula').style.background = "#707070";
-	document.getElementById('divLista').style.background = "#707070";
-	document.getElementById('divBotones').style.background = "#707070";
+	document.getElementById('divPelicula').style.background = "#00394C";
+	document.getElementById('divLista').style.background = "rgba(0, 0, 0, 0.6)";
+	document.getElementById('divBotones').style.background = "#00394C";
 }
 
 function orderAZ()
@@ -191,17 +190,17 @@ function selectRandom()
 function closeNew()
 {
 	document.getElementById('nuevaP').classList.add("hidden");
-	document.getElementById('divPelicula').style.background = "#FFF";
-	document.getElementById('divLista').style.background = "#FFF";
-	document.getElementById('divBotones').style.background = "#FFF";
+	document.getElementById('divPelicula').style.background = "#99D2E5";
+	document.getElementById('divLista').style.background = "rgba(255, 255, 255, 0.6)";
+	document.getElementById('divBotones').style.background = "#99D2E5";
 }
 
 function closeInfo()
 {
 	document.getElementById('motivo').classList.add("hidden");
-	document.getElementById('divPelicula').style.background = "#FFF";
-	document.getElementById('divLista').style.background = "#FFF";
-	document.getElementById('divBotones').style.background = "#FFF";
+	document.getElementById('divPelicula').style.background = "#99D2E5";
+	document.getElementById('divLista').style.background = "rgba(255, 255, 255, 0.6)";
+	document.getElementById('divBotones').style.background = "#99D2E5";
 }
 
 function addMovie()
@@ -222,6 +221,12 @@ function addMovie()
 		closeNew();
 		showMovieList();
 	}
+}
+
+function selectThis(movie)
+{
+	console.log(movie);
+	document.getElementById('pelicula').innerHTML = movie;
 }
 
 function randomNumber(max, min=0)
